@@ -1,0 +1,14 @@
+C:\Source\PollyOpenAI\src\PollyOpenAI\bin\Release\net9.0\PollyOpenAI.deps.json
+C:\Source\PollyOpenAI\src\PollyOpenAI\bin\Release\net9.0\PollyOpenAI.dll
+C:\Source\PollyOpenAI\src\PollyOpenAI\bin\Release\net9.0\PollyOpenAI.pdb
+C:\Source\PollyOpenAI\src\PollyOpenAI\bin\Release\net9.0\PollyOpenAI.xml
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.csproj.AssemblyReference.cache
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.AssemblyInfoInputs.cache
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.AssemblyInfo.cs
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.csproj.CoreCompileInputs.cache
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.dll
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\refint\PollyOpenAI.dll
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.xml
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.pdb
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\ref\PollyOpenAI.dll
