@@ -7,7 +7,7 @@
     <LangVersion>latest</LangVersion>
 
     <PackageId>PollyOpenAI</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Swevo</Authors>
     <Description>Polly v8 resilience for OpenAI and Azure OpenAI API calls. Automatic retry with exponential backoff on 429 rate limits (respecting Retry-After), circuit breaker on sustained failures, per-request timeout, and optional hedging. Works with any OpenAI-compatible HTTP client via a simple DelegatingHandler.</Description>
     <PackageTags>polly;polly-v8;openai;azure-openai;resilience;retry;circuit-breaker;rate-limit;429;ai;llm;gpt;chatgpt;dotnet;csharp;fault-tolerance;transient-fault;backoff;timeout;hedging;http;httpclient;microservices</PackageTags>
