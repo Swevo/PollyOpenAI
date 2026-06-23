@@ -11,6 +11,9 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -36,8 +39,8 @@ jobs:
         if: always()
         with:
           files: ./TestResults/*.trx
-          fail-on-error: true
-          fail-on-empty: true
+          fail_on: test failures
+          action_fail: false
 
   publish:
     name: Pack & Publish
