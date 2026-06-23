@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PollyOpenAI</name>
+    </assembly>
+    <members>
+        <member name="T:PollyOpenAI.HttpClientBuilderExtensions">
+            <summary>
+            Extension methods for registering <see cref="T:PollyOpenAI.PollyOpenAIHandler"/> with <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:PollyOpenAI.HttpClientBuilderExtensions.AddPollyOpenAIResilience(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder,System.Action{PollyOpenAI.OpenAIResilienceOptions})">
+            <summary>
+            Adds Polly v8 resilience (retry, circuit breaker, timeout) to an <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder"/>
+            for OpenAI API calls.
+            </summary>
+            <param name="builder">The HTTP client builder.</param>
+            <param name="configure">Optional delegate to customise resilience options.</param>
+            <returns>The original builder to allow chaining.</returns>
+        </member>
+        <member name="T:PollyOpenAI.OpenAIResilienceOptions">
+            <summary>
+            Configuration options for Polly resilience applied to OpenAI HTTP calls.
+            </summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.MaxRetries">
+            <summary>Maximum number of retry attempts for transient failures (429, 5xx). Default: 3.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.BaseDelay">
+            <summary>Base delay between retries when exponential backoff is used. Default: 1 second.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.MaxDelay">
+            <summary>Maximum delay cap for exponential backoff. Default: 30 seconds.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.CircuitBreakerMinimumThroughput">
+            <summary>
+            Minimum number of requests in the sampling window before the circuit breaker can trip. Default: 5.
+            </summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.CircuitBreakerFailureRatio">
+            <summary>Failure ratio (0–1) at which the circuit breaker opens. Default: 0.5 (50%).</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.CircuitBreakerSamplingDuration">
+            <summary>Duration of the sliding window used to evaluate failure rate. Default: 30 seconds.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.CircuitBreakerBreakDuration">
+            <summary>How long the circuit stays open before allowing a probe request. Default: 30 seconds.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.RequestTimeout">
+            <summary>Per-request timeout. Default: 100 seconds (matches HttpClient default).</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.RespectRetryAfterHeader">
+            <summary>
+            When <c>true</c>, the retry delay honours the <c>Retry-After</c> header returned by OpenAI on 429 responses.
+            Default: <c>true</c>.
+            </summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAIResilienceOptions.TransientStatusCodes">
+            <summary>
+            HTTP status codes that are considered transient and eligible for retry.
+            Defaults to 429, 500, 502, 503, 504.
+            </summary>
+        </member>
+        <member name="T:PollyOpenAI.OpenAITransientException">
+            <summary>
+            Exception thrown by <see cref="T:PollyOpenAI.PollyOpenAIHandler"/> when the OpenAI API returns
+            a transient HTTP status code (e.g. 429 or 5xx). Polly uses this to trigger retry
+            and circuit-breaker logic.
+            </summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAITransientException.StatusCode">
+            <summary>The HTTP status code returned by the API.</summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAITransientException.RetryAfter">
+            <summary>
+            The delay extracted from the <c>Retry-After</c> response header, if present.
+            </summary>
+        </member>
+        <member name="P:PollyOpenAI.OpenAITransientException.Response">
+            <summary>The raw <see cref="T:System.Net.Http.HttpResponseMessage"/> that triggered this exception.</summary>
+        </member>
+        <member name="T:PollyOpenAI.PollyOpenAIHandler">
+            <summary>
+            An <see cref="T:System.Net.Http.DelegatingHandler"/> that wraps every OpenAI HTTP request in a Polly v8
+            resilience pipeline: retry with exponential back-off (respecting <c>Retry-After</c>),
+            circuit breaker, and per-request timeout.
+            </summary>
+        </member>
+        <member name="M:PollyOpenAI.PollyOpenAIHandler.#ctor(PollyOpenAI.OpenAIResilienceOptions)">
+            <summary>
+            Initialises the handler with the given options, building the resilience pipeline.
+            </summary>
+        </member>
+        <member name="M:PollyOpenAI.PollyOpenAIHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:PollyOpenAI.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering a resilient OpenAI <see cref="T:System.Net.Http.HttpClient"/>
+            directly on <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+        </member>
+        <member name="M:PollyOpenAI.ServiceCollectionExtensions.AddPollyOpenAIHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Uri,System.Action{PollyOpenAI.OpenAIResilienceOptions})">
+            <summary>
+            Registers a named <see cref="T:System.Net.Http.HttpClient"/> called <c>"PollyOpenAI"</c> configured with
+            Polly v8 resilience (retry, circuit breaker, timeout). Inject via
+            <c>IHttpClientFactory.CreateClient("PollyOpenAI")</c> or use a typed client.
+            </summary>
+            <param name="services">The service collection.</param>
+            <param name="baseAddress">Optional base address for the OpenAI API (defaults to https://api.openai.com/).</param>
+            <param name="configure">Optional delegate to customise resilience options.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder"/> for further configuration.</returns>
+        </member>
+    </members>
+</doc>
