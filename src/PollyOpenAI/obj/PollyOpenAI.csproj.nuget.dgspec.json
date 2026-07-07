@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Source\\PollyOpenAI\\src\\PollyOpenAI\\PollyOpenAI.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.2",
       "restore": {
         "projectUniqueName": "C:\\Source\\PollyOpenAI\\src\\PollyOpenAI\\PollyOpenAI.csproj",
         "projectName": "PollyOpenAI",

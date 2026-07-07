@@ -12,3 +12,4 @@ C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\refint\PollyOpenAI.dll
 C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.xml
 C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.pdb
 C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\ref\PollyOpenAI.dll
+C:\Source\PollyOpenAI\src\PollyOpenAI\obj\Release\net9.0\PollyOpenAI.sourcelink.json
